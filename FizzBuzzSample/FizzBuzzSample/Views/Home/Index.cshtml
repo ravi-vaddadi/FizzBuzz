@@ -1,0 +1,53 @@
+﻿@model IEnumerable<FizzBuzzViewModel>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<form asp-controller="Home" asp-action="Index" method="post">
+    <fieldset>
+        <legend>Input</legend>
+        <label for="txtInput">Enter comma separated values:</label>
+        <input type="text" name="commaSeparatedValues" id="txtInput" />        
+        <input type="submit" value="Run"  />
+    </fieldset>   
+</form>
+<br />
+<br />
+<br />
+@if (Model == null) return;
+<fieldset>
+    <legend>Results</legend>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.InputFragment)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Results)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>      
+     @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.InputFragment)
+            </td>
+            <td>
+                <table>
+                    @foreach(var result in item.Results)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => result)
+                            </td>
+                        </tr>
+                    }
+                 </table> 
+            </td>            
+        </tr>}
+        </tbody>
+    </table>
+</fieldset>   
